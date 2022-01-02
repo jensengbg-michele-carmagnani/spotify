@@ -1,17 +1,23 @@
 import { getProviders, signIn } from 'next-auth/react';
 
 const login = (props) => {
-  const { provider } = props;
+  const { providers } = props;
+  console.log(Object.values(providers));
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center min-h-screen w-full bg-black ">
       <img
         className="w-52 mb-5"
-        src="image/spotify-logo-png-7057.png"
+        src="https://links.papareacts.com/9xl"
         alt="logo"
       />
-      {Object.values(provider).map((provider) => (
+      {Object.values(providers).map((provider) => (
         <div key={provider.name}>
-          <button className="">login with </button>
+          <button
+            className="bg-[#18D860] text-while p-5 rounded-full hover:text-white"
+            onClick={() => signIn(provider.id, { callbackUrl: '/' })}
+          >
+            login with {provider.name}
+          </button>
         </div>
       ))}
     </div>

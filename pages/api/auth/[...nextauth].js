@@ -46,18 +46,18 @@ export default NextAuth({
       if (account && user) {
         return {
           ...token,
-          acccessToken: account.acces_token,
-          refresToken: account.rerr_refresh_token,
+          accessToken: account.access_token,
+          refresToken: account.refresh_token,
           username: account.providerAccountId,
           accessTokenExpires: account.expires_at * 1000, // we are handling expiry times Milliseconds hence * 1000
         };
       }
-      // return previos token if the acces token has not expired yet
+      // return previos token if the access token has not expired yet
       if (Date.now() < token.accessTokenExpires) {
         console.log('ACCESS TOKEN IS VALID');
         return token;
       }
-
+      // Access token has expired, so we need to refresh it ...
       console.log('ACCESS TOKEN HAS EXPIRED, REFRESHING...');
       return await refreshAccessToken(token);
     },
