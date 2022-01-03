@@ -6,11 +6,26 @@ import {
   PlusCircleIcon,
   HeartIcon,
 } from '@heroicons/react/outline';
+
 import { signOut, useSession } from 'next-auth/react';
+import { useState, useEffect } from 'react';
+import useSpotify from '../hooks/use-Spotify';
+
+
 
 const Sidebar = () => {
+  const spotifyApi = useSpotify()
   const { data: session, status } = useSession();
-  console.log(session);
+  const [playlists, setPlayLists] = useState([]);
+  
+  useEffect(() => {
+    if (spotifyApi.getAccessToken()) {
+      spotifyApi.getUserPlaylists().then((data) => {
+        setPlayLists(data.body.items);
+      });
+    }
+  }, [session, spotifyApi]);
+  console.log(playlists);
   return (
     <div
       className="
@@ -20,7 +35,6 @@ const Sidebar = () => {
       overflow-y-scroll 
       scrollbar-hide
       h-screen"
-      
     >
       <div className="space-y-4 ">
         <button
@@ -57,65 +71,11 @@ const Sidebar = () => {
         </button>
         <hr className="border-t--[0.1px] border-gray-900" />
 
-        {/* playlist  */}
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
-        <p className="cursor-pointer hover:text-white">Playlist name... </p>
+        {playlists.map((playlist, index) => {
+          <p key={playlist.id} className="cursor-pointer hover:text-white">
+            {playlist.name}
+          </p>;
+        })}
       </div>
     </div>
   );
