@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import { ChevronDownIcon } from '@heroicons/react/outline';
 import { shuffle } from 'lodash';
 import { playlistIdState, playlistState } from '../atoms/playlistAtom';
 import { useRecoilValue, useRecoilState } from 'recoil';
+
 import useSpotify from '../hooks/use-Spotify';
 import Songs from '../components/Songs';
 const colors = [
@@ -37,12 +38,13 @@ const Center = () => {
       });
   }, [spotifyApi, playlistId]);
 
-  console.log(playlist);
-
   return (
     <div className="flex-grow justify-start text-white h-screen overflow-y-scroll scrollbar-hide">
       <header className="absolute top-5 right-8 ">
-        <div className=" flex items-center bg-black space-x-3 opacity-90 hover:opacity-80 rounded-full p-1  cursor-pointer w-full">
+        <div
+          onClick={() => signOut()}
+          className=" flex items-center bg-black space-x-3 opacity-90 hover:opacity-80 rounded-full p-1  cursor-pointer w-full"
+        >
           <img
             className="rounded-full w-10 h-10 "
             src={

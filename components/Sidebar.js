@@ -26,7 +26,7 @@ const Sidebar = () => {
       });
     }
   }, [session, spotifyApi]);
-  console.log(playlistId);
+  
 
   return (
     <div
