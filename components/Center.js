@@ -43,7 +43,7 @@ const Center = () => {
       <header className="absolute top-5 right-8 ">
         <div
           onClick={() => signOut()}
-          className=" flex items-center bg-black space-x-3 opacity-90 hover:opacity-80 rounded-full p-1  cursor-pointer w-full"
+          className=" flex items-center bg-black space-x-3 opacity-90 hover:opacity-80 rounded-full p-1  cursor-pointer w-full sticky"
         >
           <img
             className="rounded-full w-10 h-10 "
