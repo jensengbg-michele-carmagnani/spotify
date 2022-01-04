@@ -40,9 +40,9 @@ const Center = () => {
   console.log(playlist);
 
   return (
-    <div className="flex-grow text-white">
+    <div className="flex-grow justify-start text-white h-screen overflow-y-scroll scrollbar-hide">
       <header className="absolute top-5 right-8 ">
-        <div className="flex items-center   space-x-3 opacity-90 hover:opacity-80 rounded-full p-1  cursor-pointer w-full">
+        <div className=" flex items-center bg-black space-x-3 opacity-90 hover:opacity-80 rounded-full p-1  cursor-pointer w-full">
           <img
             className="rounded-full w-10 h-10 "
             src={
@@ -54,14 +54,14 @@ const Center = () => {
         </div>
       </header>
       <section
-        className={`flex items-start space-x-7 bg-gradient-to-b to-black ${color} h-80 text-white p-80`}
+        className={`flex justify-start items-end space-x-7 bg-gradient-to-b to-black ${color} h-80 text-white p-8`}
       >
         <img
           className="h-44 w-44 shadow-2xl"
           src={playlist?.images?.[0]?.url}
           alt=""
         />
-        <div>
+        <div className="">
           <p>PLAYLIST</p>
           <h1 className="text-2xl md:text-3xl xl:text-5xl font-bold">
             {playlist?.name}
