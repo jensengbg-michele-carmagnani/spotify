@@ -4,8 +4,9 @@ import {
   SearchIcon,
   LibraryIcon,
   PlusCircleIcon,
-  HeartIcon,
+  
 } from '@heroicons/react/outline';
+import {HeartIcon} from '@heroicons/react/solid'
 
 import { signOut, useSession } from 'next-auth/react';
 import { useState, useEffect } from 'react';
@@ -65,9 +66,10 @@ const Sidebar = () => {
           <PlusCircleIcon className="h-5 w-5" />
           <p>Create Playlist</p>
         </button>
-        <button className="flex items-center space-x-2 hover:text-white">
+        <button className="flex items-center space-x-2 text-blue-800 hover:text-white
+        ">
           <HeartIcon className="h-5 w-5" />
-          <p>Your Library</p>
+          <p>Liked Songs</p>
         </button>
         <button className="flex items-center space-x-2 hover:text-white">
           <RssIcon className="h-5 w-5" />
