@@ -15,8 +15,9 @@ const colors = [
   'from-yellow-500',
   'from-pink-500',
   'from-purple-500',
-];
+]; 
 const Center = () => {
+  
   const { data: session } = useSession();
   const playlistId = useRecoilValue(playlistIdState);
   const [color, setColor] = useState(null);
@@ -38,8 +39,9 @@ const Center = () => {
       });
   }, [spotifyApi, playlistId]);
 
+  
   return (
-    <div className="flex-grow justify-start text-white h-screen overflow-y-scroll scrollbar-hide">
+    <div className="flex-grow justify-start text-white h-screen overflow-y-scroll scrollbar-hidden ">
       <header className="absolute top-5 right-8 ">
         <div
           onClick={() => signOut()}
@@ -48,7 +50,9 @@ const Center = () => {
           <img
             className="rounded-full w-10 h-10 "
             src={
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3hwxmRfs4cG21fRSmvUsVJWSV2U93IMK4pw&usqp=CAU'
+              session?.user?.image
+                ? session?.user?.image
+                : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3hwxmRfs4cG21fRSmvUsVJWSV2U93IMK4pw&usqp=CAU'
             }
           />
           <h2>{session?.user?.name}</h2>

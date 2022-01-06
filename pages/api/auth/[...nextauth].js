@@ -9,7 +9,7 @@ async function refreshAccessToken(token) {
     spotifyApi.setRefreshToken(token.refreshToken);
 
     const { body: refreshedToken } = await spotifyApi.refreshAccessToken();
-    console.log('REFRESHED TOKEN ISSUED', refreshedToken);
+    console.log('REFRESHED TOKEN IS', refreshedToken);
 
     return {
       ...token,
@@ -44,6 +44,7 @@ export default NextAuth({
     async jwt({ token, account, user }) {
       // initial sing in
       if (account && user) {
+        console.log('account',account?.userId)
         return {
           ...token,
           accessToken: account.access_token,
@@ -63,8 +64,11 @@ export default NextAuth({
     },
 
     async session({ session, token }) {
+      // @ts-ignore
       session.user.accessToken = token.accessToken;
+      // @ts-ignore
       session.user.refreshToken = token.refreshToken;
+      // @ts-ignore
       session.user.username = token.username;
 
       return session;
