@@ -9,9 +9,9 @@ export default function Home() {
         <Sidebar />
         <Center />
       </main>
-      <div className="sticy bottom-0">
-        <Player />
-      </div>
+        <div className="sticky bottom-0 ">
+          <Player />
+        </div>
     </div>
   );
 }
